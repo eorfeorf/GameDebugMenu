@@ -1,0 +1,33 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Function Executor</title>
+</head>
+<body>
+    <h1>Execute Unity Function</h1>
+    <button id="executeButton">Execute Unity Function</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('executeButton').addEventListener('click', () => {
+            fetch('/execute-unity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.message;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = "Error occurred!";
+            });
+        });
+    </script>
+</body>
+</html>
